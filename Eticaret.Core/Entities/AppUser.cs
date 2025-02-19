@@ -20,7 +20,7 @@
 
         public bool IsAdmin { get; set; }
 
-        public DateTime CreatDate { get; set;}
+        public DateTime CreatDate { get; set; } = DateTime.Now;
 
         public Guid? UserGuid { get; set; } = Guid.NewGuid();
 
