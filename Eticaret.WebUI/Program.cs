@@ -1,3 +1,5 @@
+using Eticaret.Data;
+
 namespace Eticaret.WebUI
 {
     public class Program
@@ -8,6 +10,8 @@ namespace Eticaret.WebUI
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<DataBaseContext>();
 
             var app = builder.Build();
 
