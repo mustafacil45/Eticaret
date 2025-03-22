@@ -140,6 +140,10 @@ namespace Eticaret.WebUI.Areas.Admin.Controllers
             var brand = await _context.Brands.FindAsync(id);
             if (brand != null)
             {
+                if (!string.IsNullOrEmpty(brand.Logo))
+                {
+                    FileHelper.FileRemover(brand.Logo);
+                }
                 _context.Brands.Remove(brand);
             }
 
