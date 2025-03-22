@@ -80,7 +80,7 @@ namespace Eticaret.WebUI.Areas.Admin.Controllers
         // POST: Admin/Brands/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Brand brand, IFormFile? Logo)
+        public async Task<IActionResult> Edit(int id, Brand brand, IFormFile? Logo, bool cbResmiSil = false)
         {
             if (id != brand.Id)
             {
@@ -91,6 +91,8 @@ namespace Eticaret.WebUI.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (cbResmiSil)
+                        brand.Logo = string.Empty;
                     if(Logo is not null)
                         brand.Logo = await FileHelper.FileLoaderAsync(Logo);
                     _context.Update(brand);
