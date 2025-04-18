@@ -145,6 +145,10 @@ namespace Eticaret.WebUI.Areas.Admin.Controllers
             var category = await _context.Categories.FindAsync(id);
             if (category != null)
             {
+                if (!string.IsNullOrEmpty(category.Image))
+                {
+                    FileHelper.FileRemover(category.Image, "/Img/Categories/");
+                }
                 _context.Categories.Remove(category);
             }
 
