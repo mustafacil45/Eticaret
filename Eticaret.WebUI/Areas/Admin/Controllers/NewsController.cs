@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Eticaret.Core.Entities;
 using Eticaret.Data;
+using Eticaret.WebUI.Utils;
 
 namespace Eticaret.WebUI.Areas.Admin.Controllers
 {
@@ -46,14 +47,13 @@ namespace Eticaret.WebUI.Areas.Admin.Controllers
         }
 
         // POST: Admin/News/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Image,IsActive")] News news)
+        public async Task<IActionResult> Create(News news, IFormFile? Image)
         {
             if (ModelState.IsValid)
             {
+                news.Image = await FileHelper.FileLoaderAsync(Image);
                 _context.Add(news);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
