@@ -78,11 +78,9 @@ namespace Eticaret.WebUI.Areas.Admin.Controllers
         }
 
         // POST: Admin/News/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Image,IsActive")] News news)
+        public async Task<IActionResult> Edit(int id, News news, IFormFile? Image, bool cbResmiSil = false)
         {
             if (id != news.Id)
             {
@@ -93,6 +91,10 @@ namespace Eticaret.WebUI.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (cbResmiSil)
+                        news.Image = string.Empty;
+                    if (Image is not null)
+                        news.Image = await FileHelper.FileLoaderAsync(Image, "/Img/");
                     _context.Update(news);
                     await _context.SaveChangesAsync();
                 }
