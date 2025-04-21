@@ -140,6 +140,10 @@ namespace Eticaret.WebUI.Areas.Admin.Controllers
             var news = await _context.News.FindAsync(id);
             if (news != null)
             {
+                if (!string.IsNullOrEmpty(news.Image))
+                {
+                    FileHelper.FileRemover(news.Image, "/Img/");
+                }
                 _context.News.Remove(news);
             }
 
