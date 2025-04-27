@@ -90,7 +90,7 @@ namespace Eticaret.WebUI.Areas.Admin.Controllers
         // POST: Admin/Products/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Product product, IFormFile? Image)
+        public async Task<IActionResult> Edit(int id, Product product, IFormFile? Image, bool cbResmiSil = false)
         {
             if (id != product.Id)
             {
@@ -101,6 +101,10 @@ namespace Eticaret.WebUI.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (cbResmiSil)
+                        product.Image = string.Empty;
+                    if (Image is not null)
+                        product.Image = await FileHelper.FileLoaderAsync(Image, "/Img/Products/");
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }

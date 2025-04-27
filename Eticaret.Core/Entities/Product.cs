@@ -19,7 +19,7 @@ namespace Eticaret.Core.Entities
         public int Stock { get; set; }
         [Display(Name = "Aktif?")]
         public bool IsActive { get; set; }
-        [Display(Name = "Anasayda Göster")]
+        [Display(Name = "Anasayfa")]
         public bool IsHome { get; set; }
         [Display(Name = "Kategori")]
         public int? CategoryId { get; set; }
