@@ -30,8 +30,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
+            <td> 
+                <a href="/Img/Slider/@item.Image">
+                    <img src="/Img/Slider/@item.Image" alt="" height="50" />
+                </a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Link)

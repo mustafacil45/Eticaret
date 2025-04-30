@@ -77,12 +77,10 @@ namespace Eticaret.WebUI.Areas.Admin.Controllers
             return View(slider);
         }
 
-        // POST: Admin/Sliders/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Admin/Sliders/Edit/
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Image,Link")] Slider slider)
+        public async Task<IActionResult> Edit(int id, Slider slider, IFormFile? Image, bool cbResmiSil = false)
         {
             if (id != slider.Id)
             {
@@ -93,6 +91,10 @@ namespace Eticaret.WebUI.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (cbResmiSil)
+                        slider.Image = string.Empty;
+                    if (Image is not null)
+                        slider.Image = await FileHelper.FileLoaderAsync(Image, "/Img/Slider/");
                     _context.Update(slider);
                     await _context.SaveChangesAsync();
                 }
