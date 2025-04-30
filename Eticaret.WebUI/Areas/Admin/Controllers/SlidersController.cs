@@ -140,6 +140,10 @@ namespace Eticaret.WebUI.Areas.Admin.Controllers
             var slider = await _context.Sliders.FindAsync(id);
             if (slider != null)
             {
+                if (!string.IsNullOrEmpty(slider.Image))
+                {
+                    FileHelper.FileRemover(slider.Image, "/Img/Slider/");
+                }
                 _context.Sliders.Remove(slider);
             }
 

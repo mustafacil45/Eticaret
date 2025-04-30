@@ -1,13 +1,10 @@
-﻿@model Eticaret.Core.Entities.Slider
+﻿@model Slider
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Slide Detay";
 }
 
-<h1>Details</h1>
-
 <div>
-    <h4>Slider</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -26,7 +23,7 @@
             @Html.DisplayNameFor(model => model.Image)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
+            <img src="/Img/Slider/@Model.Image" height="75" />
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Link)
@@ -37,6 +34,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Düzenle</a> |
+    <a asp-action="Index">Listeye Dön</a>
 </div>
