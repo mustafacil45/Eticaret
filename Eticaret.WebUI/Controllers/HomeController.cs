@@ -21,7 +21,7 @@ public class HomeController : Controller
         {
             Sliders = await _context.Sliders.ToListAsync(),
             News = await _context.News.ToListAsync(),
-            Products = await _context.Products.ToListAsync(),
+            Products = await _context.Products.Where(p=>p.IsActive && p.IsHome).ToListAsync(),
         };
         return View(model);
     }
