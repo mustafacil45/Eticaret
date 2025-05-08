@@ -1,4 +1,5 @@
 ﻿using Eticaret.Data;
+using Eticaret.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,8 +35,11 @@ namespace Eticaret.WebUI.Controllers
             {
                 return NotFound();
             }
-
-            return View(product);
+            var model = new ProductDetailViewModel() 
+            { Product = product,
+            RelatedProducts = _context.Products.Where(p => p.IsActive && p.CategoryId == product.CategoryId && p.Id !=product.Id)
+            };
+            return View(model);
         }
     }
 }
