@@ -11,6 +11,7 @@
 </head>
 <body>
     <partial name="_Header" />
+    @Html.Raw(TempData["Message"])
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

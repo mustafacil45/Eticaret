@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Eticaret.WebUI.Models;
 using Eticaret.Data;
 using Microsoft.EntityFrameworkCore;
+using Eticaret.Core.Entities;
 
 namespace Eticaret.WebUI.Controllers;
 
@@ -33,6 +34,28 @@ public class HomeController : Controller
     public IActionResult ContactUs()
     {
         return View();
+    }
+    [HttpPost]
+    public IActionResult ContactUs(Contact contact)
+    {
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                _context.Contacts.Add(contact);
+                var sonuc = _context.SaveChanges();
+                if(sonuc > 0)
+                {
+                    TempData["Message"] = "<div class = 'alert alert-success'>Mesajýnýz Gönderilmiþtir!</div>";
+                    return RedirectToAction("ContactUs");
+                }
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Hata Oluþtu!");
+            }
+        }
+        return View(contact);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
