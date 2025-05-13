@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Eticaret.Core.Entities;
 using Eticaret.Data;
 
-namespace Eticaret.WebUI.Areas.Admin
+namespace Eticaret.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class AppUsersController : Controller
