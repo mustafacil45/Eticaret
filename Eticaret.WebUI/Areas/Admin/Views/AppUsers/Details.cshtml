@@ -1,13 +1,11 @@
-﻿@model Eticaret.Core.Entities.AppUser
+﻿@model AppUser
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Kullanıcı Detay";
 }
 
-<h1>Details</h1>
 
 <div>
-    <h4>AppUser</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -55,12 +53,25 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IsAdmin)
         </dt>
+
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IsAdmin)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreatDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserGuid)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserGuid)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Düzenle</a> |
+    <a asp-action="Index">Listeye Dön</a>
 </div>
