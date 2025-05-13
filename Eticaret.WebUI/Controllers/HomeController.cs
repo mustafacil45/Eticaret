@@ -46,7 +46,10 @@ public class HomeController : Controller
                 var sonuc = _context.SaveChanges();
                 if(sonuc > 0)
                 {
-                    TempData["Message"] = "<div class = 'alert alert-success'>Mesajýnýz Gönderilmiþtir!</div>";
+                    TempData["Message"] = @"<div class=""alert alert-success alert-dismissible fade show"" role=""alert"">
+                    <strong>Mesajýnýz Gönderilmiþtir!</strong>
+    <button type=""button"" class=""btn-close"" data-bs-dismiss=""alert"" aria-label=""Close""></button>
+    </div>";
                     return RedirectToAction("ContactUs");
                 }
             }
