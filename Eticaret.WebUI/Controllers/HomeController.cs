@@ -4,6 +4,7 @@ using Eticaret.WebUI.Models;
 using Eticaret.Data;
 using Microsoft.EntityFrameworkCore;
 using Eticaret.Core.Entities;
+using Eticaret.WebUI.Utils;
 
 namespace Eticaret.WebUI.Controllers;
 
@@ -36,20 +37,21 @@ public class HomeController : Controller
         return View();
     }
     [HttpPost]
-    public IActionResult ContactUs(Contact contact)
+    public async Task<IActionResult> ContactUsAsync(Contact contact)
     {
         if (ModelState.IsValid)
         {
             try
             {
-                _context.Contacts.Add(contact);
-                var sonuc = _context.SaveChanges();
+                await _context.Contacts.AddAsync(contact);
+                var sonuc = await _context.SaveChangesAsync();
                 if(sonuc > 0)
                 {
                     TempData["Message"] = @"<div class=""alert alert-success alert-dismissible fade show"" role=""alert"">
                     <strong>Mesajýnýz Gönderilmiþtir!</strong>
     <button type=""button"" class=""btn-close"" data-bs-dismiss=""alert"" aria-label=""Close""></button>
     </div>";
+                    //await MailHelper.SendMailAsync(contact);
                     return RedirectToAction("ContactUs");
                 }
             }
