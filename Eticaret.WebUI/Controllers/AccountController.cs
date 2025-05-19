@@ -1,7 +1,8 @@
 ﻿using Eticaret.Core.Entities;
 using Eticaret.Data;
 using Eticaret.WebUI.Models;
-using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication; //login
+using Microsoft.AspNetCore.Authorization; //login
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;  //login
@@ -16,6 +17,7 @@ namespace Eticaret.WebUI.Controllers
         {
             _context = context;
         }
+        [Authorize]
         public IActionResult Index()
         {
             return View();
@@ -29,8 +31,7 @@ namespace Eticaret.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
+                
                     var account = await _context.AppUsers.FirstOrDefaultAsync(x => x.Email == LoginViewModel.Email & x.Password == LoginViewModel.Password & x.IsActive);
                     if (account == null)
                     {
@@ -51,7 +52,8 @@ namespace Eticaret.WebUI.Controllers
                         await HttpContext.SignInAsync(userPrincipal);
                         return RedirectToAction("Index", "Home");
                     }
-                }
+                try
+                { }
                 catch (Exception hata)
                 {
                     //loglama

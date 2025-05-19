@@ -1,4 +1,5 @@
 using Eticaret.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Eticaret.WebUI
 {
@@ -12,6 +13,8 @@ namespace Eticaret.WebUI
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDbContext<DataBaseContext>();
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
             var app = builder.Build();
 
