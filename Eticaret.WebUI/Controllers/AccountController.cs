@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication; //login
 using Microsoft.AspNetCore.Authorization; //login
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;  //login
 
 namespace Eticaret.WebUI.Controllers
@@ -50,7 +51,7 @@ namespace Eticaret.WebUI.Controllers
                         var userIdentity = new ClaimsIdentity(claims, "Login");
                         ClaimsPrincipal userPrincipal = new ClaimsPrincipal(userIdentity);
                         await HttpContext.SignInAsync(userPrincipal);
-                        return RedirectToAction("Index", "Home");
+                        return Redirect(string.IsNullOrEmpty(LoginViewModel.ReturnUrl) ? "/" : LoginViewModel.ReturnUrl);
                     }
                 try
                 { }
