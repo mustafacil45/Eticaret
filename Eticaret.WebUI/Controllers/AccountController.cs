@@ -32,7 +32,8 @@ namespace Eticaret.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                try
+                {
                     var account = await _context.AppUsers.FirstOrDefaultAsync(x => x.Email == LoginViewModel.Email & x.Password == LoginViewModel.Password & x.IsActive);
                     if (account == null)
                     {
@@ -53,8 +54,7 @@ namespace Eticaret.WebUI.Controllers
                         await HttpContext.SignInAsync(userPrincipal);
                         return Redirect(string.IsNullOrEmpty(LoginViewModel.ReturnUrl) ? "/" : LoginViewModel.ReturnUrl);
                     }
-                try
-                { }
+                }
                 catch (Exception hata)
                 {
                     //loglama
@@ -79,6 +79,11 @@ namespace Eticaret.WebUI.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(appUser);
+        }
+        public async Task<IActionResult> SingOutAsync()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("SingIn");
         }
     }
 }
