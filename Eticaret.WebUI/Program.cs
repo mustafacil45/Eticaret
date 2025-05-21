@@ -13,6 +13,8 @@ namespace Eticaret.WebUI
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddSession();
+
             builder.Services.AddDbContext<DataBaseContext>();
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
@@ -44,6 +46,7 @@ namespace Eticaret.WebUI
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession(); // session kullan
 
             app.UseAuthentication(); // önce oturum açma
             app.UseAuthorization(); // sonra yetkilendirme
