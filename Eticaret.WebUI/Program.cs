@@ -18,7 +18,7 @@ namespace Eticaret.WebUI
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
             {
                 x.LoginPath = "/Account/SýngIn";
-                x.AccessDeniedPath = "/ AccessDenied";
+                x.AccessDeniedPath = "/AccessDenied";
                 x.Cookie.Name = "Account";
                 x.Cookie.MaxAge = TimeSpan.FromDays(7);
                 x.Cookie.IsEssential = true;
