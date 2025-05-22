@@ -3,6 +3,7 @@ using Eticaret.Data;
 using Eticaret.WebUI.Models;
 using Microsoft.AspNetCore.Authentication; //login
 using Microsoft.AspNetCore.Authorization; //login
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -21,7 +22,21 @@ namespace Eticaret.WebUI.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            return View();
+            AppUser user = _context.AppUsers.FirstOrDefault(x=>x.UserGuid.ToString() == HttpContext.User.FindFirst("UserGuid").Value);
+            if (user is null)
+            {
+                return NotFound();
+            }
+            var model = new UserEditViewModel()
+            {
+                Email = user.Email,
+                Id = user.Id,
+                Name = user.Name,
+                Password = user.Password,
+                Phone = user.Phone,
+                SurName = user.SurName,
+            };
+            return View(model);
         }
         public IActionResult SingIn()
         {
