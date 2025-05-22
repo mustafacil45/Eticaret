@@ -26,7 +26,7 @@ namespace Eticaret.WebUI.Controllers
         {
             var favoriler = GetFavorites();
             var product = _context.Products.Find(ProductId);
-            if (product != null && favoriler.Any(p => p.Id == ProductId))
+            if (product != null && !favoriler.Any(p => p.Id == ProductId))
             {
                 favoriler.Add(product);
                 HttpContext.Session.SetJson("GetFavorites", favoriler);
