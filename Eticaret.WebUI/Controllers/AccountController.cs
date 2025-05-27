@@ -56,7 +56,7 @@ namespace Eticaret.WebUI.Controllers
                         _context.AppUsers.Update(user);
                         var sonuc = _context.SaveChanges();
                         if (sonuc > 0)
-                        {
+                        {  
                             TempData["Message"] = @"<div class=""alert alert-success alert-dismissible fade show"" role=""alert"">
                     <strong>Hesap Bilgileriniz Güncellenmiştir</strong>
     <button type=""button"" class=""btn-close"" data-bs-dismiss=""alert"" aria-label=""Close""></button>
